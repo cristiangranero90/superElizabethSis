@@ -159,7 +159,10 @@ public class Juego extends InterfaceJuego
 				
 			}
 			
-			
+		if(this.bala!=null && this.bala.getX()>799) {
+			this.bala=null;
+			this.disparo=false;
+		}
 			
 			
 		}
