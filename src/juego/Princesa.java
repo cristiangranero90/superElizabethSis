@@ -8,14 +8,14 @@ import entorno.Herramientas;
 public class Princesa {
 	
 	
-	 Entorno entorno;
-	 Image imagen;
+	
+	 private Image imagen;
 	 private double x;
 	 private double y;
 	 private int vidas;
 	 private double angulo;
 	 private  boolean salta;
-	private int balas;
+	 private int balas;
 	
 	
 	

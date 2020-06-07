@@ -17,15 +17,12 @@ public class Juego extends InterfaceJuego
 	private Bala bala;
 	private Soldado [] soldados;
 	private boolean disparo;
-	Image fondo;
+	private Image fondo;
 	private int puntos;
 	private int cantidadSoldados;
-	private boolean choque;
-	//prueba
 	
-	// Variables y métodos propios de cada grupo
-	// ...
 	
+	//setter and getter
 	public Entorno getEntorno() {
 		return entorno;
 	}
