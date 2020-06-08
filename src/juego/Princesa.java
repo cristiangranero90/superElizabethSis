@@ -2,14 +2,13 @@ package juego;
 
 import java.awt.Image;
 
+
 import entorno.Entorno;
 import entorno.Herramientas;
 
 public class Princesa {
 	
 	
-	
-	 private Image imagen;
 	 private double x;
 	 private double y;
 	 private int vidas;
@@ -17,14 +16,35 @@ public class Princesa {
 	 private  boolean salta;
 	 private int balas;
 	
+	 //Imagenes de princesa
+	 
+	 private Image derecha;
+	 private Image izquierda;
+	 private Image quieta;
+	 private Image saltando1;
+	 private Image saltando2;
+	 private Image disparando;
+	 
+	 
+	 
+	 
+	
 	
 	
 	public Princesa(int x, int y, int vidas){
 		this.x = x;
 		this.y = y;
-		this.imagen= Herramientas.cargarImagen("princesa1.png");
 		this.vidas=vidas;
 		this.balas=20;
+		
+		//Carga de nuevas imagenes
+		this.derecha = Herramientas.cargarImagen("caminando1.png");
+		this.izquierda = Herramientas.cargarImagen("caminandoI1.png");
+		this.quieta = Herramientas.cargarImagen("parada1.png");
+		this.saltando1 = Herramientas.cargarImagen("saltando1.png");
+		this.saltando2 = Herramientas.cargarImagen("saltando2.png");
+		this.disparando = Herramientas.cargarImagen("disparando.png");
+		
 		
 		
 		
@@ -38,19 +58,34 @@ public class Princesa {
 	
 	
 	
-	public void dibujarse(Entorno entorno) {
+	public void dibujarse(Entorno entorno) { //Se agregaron los sprites a dibujarse
 		
-			entorno.dibujarImagen(imagen, this.x, this.y, this.angulo, 0.1);
+			if (entorno.estaPresionada(entorno.TECLA_DERECHA)) {
+				entorno.dibujarImagen(this.derecha , this.x, this.y, this.angulo, 1.8);
+			}
+			else if (entorno.estaPresionada(entorno.TECLA_IZQUIERDA)) {
+				entorno.dibujarImagen(this.izquierda, this.x, this.y, this.angulo, 1.8);
+			}
+			else if (entorno.estaPresionada(entorno.TECLA_ESPACIO)) {
+				entorno.dibujarImagen(this.disparando, this.x, this.y, this.angulo, 1.8);
+			}
+			
+			else {
+				entorno.dibujarImagen(this.quieta, this.x, this.y, this.angulo, 1.8);
+			}
 		
 	}
-	public void saltar() {
+	public void saltar(Entorno entorno) { //Recibe entorno para poder dibujar el salto
 	if(this.y>200) {
 		this.y= this.y - 6;
+		entorno.dibujarImagen(this.saltando1, this.x, this.y, this.angulo, 1.8);
+		
 	}
 	}
-	public void bajar() {
+	public void bajar(Entorno entorno) { //Recibe entorno para poder dibujar el salto
 		if(this.y<=385) {
 			this.y=this.y+4;
+			entorno.dibujarImagen(this.saltando2, this.x, this.y, this.angulo, 1.8);
 		}
 	}
 
@@ -66,12 +101,7 @@ public class Princesa {
 		}
 		
 	}
-	public Image getImagen() {
-		return imagen;
-	}
-	public void setImagen(Image imagen) {
-		this.imagen = imagen;
-	}
+	
 	public int getVidas() {
 		return vidas;
 	}

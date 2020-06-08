@@ -173,13 +173,13 @@ public class Juego extends InterfaceJuego
 
 	
 		if(this.salto) {
-			princesa.saltar();
+			princesa.saltar(entorno);
 		}
 		if(princesa.getY()<202) {
 			this.salto=false;
 		}
 		if(!this.salto) {
-			princesa.bajar();
+			princesa.bajar(entorno);
 			
 		}
 
