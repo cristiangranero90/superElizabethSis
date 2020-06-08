@@ -8,12 +8,10 @@ import entorno.Herramientas;
 
 public class Princesa {
 	
-	
 	 private double x;
 	 private double y;
 	 private int vidas;
 	 private double angulo;
-	 private  boolean salta;
 	 private int balas;
 	
 	 //Imagenes de princesa
@@ -24,13 +22,7 @@ public class Princesa {
 	 private Image saltando1;
 	 private Image saltando2;
 	 private Image disparando;
-	 
-	 
-	 
-	 
-	
-	
-	
+
 	public Princesa(int x, int y, int vidas){
 		this.x = x;
 		this.y = y;
@@ -44,20 +36,8 @@ public class Princesa {
 		this.saltando1 = Herramientas.cargarImagen("saltando1.png");
 		this.saltando2 = Herramientas.cargarImagen("saltando2.png");
 		this.disparando = Herramientas.cargarImagen("disparando.png");
-		
-		
-		
-		
 	}
-	public double getX() {
-		return this.x;
-	}
-	public double getY() {
-		return this.y;
-	}
-	
-	
-	
+
 	public void dibujarse(Entorno entorno) { //Se agregaron los sprites a dibujarse
 		
 			if (entorno.estaPresionada(entorno.TECLA_DERECHA)) {
@@ -101,6 +81,14 @@ public class Princesa {
 		}
 		
 	}
+
+	public double getX() {
+		return this.x;
+	}
+	public double getY() {
+		return this.y;
+	}
+
 	
 	public int getVidas() {
 		return vidas;
@@ -113,12 +101,6 @@ public class Princesa {
 	}
 	public void setAngulo(double angulo) {
 		this.angulo = angulo;
-	}
-	public boolean isSalta() {
-		return salta;
-	}
-	public void setSalta(boolean salta) {
-		this.salta = salta;
 	}
 	public int getBalas() {
 		return balas;

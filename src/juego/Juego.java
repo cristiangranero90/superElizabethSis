@@ -3,6 +3,7 @@ package juego;
 
 import java.awt.Color;
 import java.awt.Image;
+import java.util.Random;
 
 import entorno.Entorno;
 import entorno.Herramientas;
@@ -20,6 +21,12 @@ public class Juego extends InterfaceJuego
 	private Image fondo;
 	private int puntos;
 	private int cantidadSoldados;
+	private Obstaculo [] obstaculos;
+	private Random r;
+	private Color []c;
+	
+	// agregar obstaculos;
+	
 	
 	
 	//setter and getter
@@ -111,11 +118,34 @@ public class Juego extends InterfaceJuego
 		fondo = Herramientas.cargarImagen("fondo.jpg");
 		princesa = new Princesa(200, 385, 5);
 		
+		r = new Random();
+		
+		
+		//ejemplo de array de colores, podrìa ser imagenes para los obstaculos.
+		this.c= new Color [] {Color.BLACK,Color.blue, Color.white, Color.yellow, Color.cyan};
+		
+		int a=800; //variable para que aparezcan los obstaculos.
+		
+		this.obstaculos= new Obstaculo[20];
+		
+		for(int i =0;i<this.obstaculos.length;i++) {
+			this.obstaculos[i]=new Obstaculo(a,420,50,50+r.nextInt(30),0,c[r.nextInt(4)]);
+			
+			
+			a=a+333; 
+			
+		}
+		
+		
+		
+		
 		/*se crean los 15 soldados
 		 * */
 		
-		this.soldados = new Soldado[15];
 		int j=800;
+		
+		this.soldados = new Soldado[15];
+		
 		for(int i=0;i<this.soldados.length;i++) {
 			this.soldados[i]=new Soldado(j,385);
 			j=j+200;
@@ -136,7 +166,13 @@ public class Juego extends InterfaceJuego
 		entorno.dibujarImagen(fondo, 0, 0, 0);
 		if(!this.ganado()) {
 		
-		princesa.dibujarse(entorno);
+			princesa.dibujarse(entorno);
+		
+		for(int i=0;i<this.obstaculos.length;i++) {
+			this.obstaculos[i].dibujarse(entorno);
+			this.obstaculos[i].avanzar();
+		}
+		
 		
 	
 		
@@ -155,6 +191,8 @@ public class Juego extends InterfaceJuego
 				this.disparo=false;
 				
 			}
+			
+			
 			
 		if(this.bala!=null && this.bala.getX()>799) {
 			this.bala=null;
