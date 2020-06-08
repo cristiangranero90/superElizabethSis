@@ -183,7 +183,7 @@ public class Juego extends InterfaceJuego
 			
 		}
 
-		if (entorno.estaPresionada(entorno.TECLA_ESPACIO) && this.disparo==false && princesa.getBalas()>0) {
+		if (entorno.estaPresionada(entorno.TECLA_ESPACIO) && this.disparo==false && princesa.getBalas()>0 && !entorno.estaPresionada(entorno.TECLA_IZQUIERDA)) {
 				
 				this.bala = new Bala(princesa.getX(), princesa.getY());
 				princesa.setBalas(princesa.getBalas()-1);
