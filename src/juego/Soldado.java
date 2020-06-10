@@ -24,8 +24,9 @@ public class Soldado {
 	}
 	public void avanzar() {
 		if(this.getX()>=0) {
-			this.setX(this.getX()-2);
+			this.setX(this.getX()-1);
 		}
+		
 		else {
 			this.setX(3000);
 		}
@@ -44,17 +45,20 @@ public class Soldado {
 	}
 	
 	
-	public boolean colision(Princesa princesa, Soldado soldado) {
+	
+	public boolean colisionPrincesa(Princesa princesa) {
 		
 		
-		double distancia=Math.sqrt((Math.pow((princesa.getX() - soldado.getX()),2))+(Math.pow(princesa.getY()-soldado.getY(), 2)));
+		double distancia=Math.sqrt((Math.pow((princesa.getX() - this.getX()),2))+(Math.pow(princesa.getY()-this.getY(), 2)));
 		
 		if(distancia<=50 ) {
+			
 			return true;
 		}else {
 			return false;
 		}
 	}
+	
 	
 	public boolean colisionBala(Bala bala) {
 		
@@ -67,7 +71,6 @@ public class Soldado {
 		}
 	}
 	
-
 
 	public double getX() {
 		return x;
