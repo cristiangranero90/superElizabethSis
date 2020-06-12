@@ -14,6 +14,7 @@ public class Obstaculo {
 	private double alto;
 	private Color color;
 	private boolean crece;
+	private boolean haceDaño;
 
 	
 	public Obstaculo(double x, Color color, boolean crece ) {
@@ -35,6 +36,19 @@ public class Obstaculo {
 		}
 		
 	}
+
+	public boolean colisionPrincesa(Princesa princesa) {
+		
+		
+		double distancia=Math.sqrt((Math.pow((princesa.getX() - this.getX()),2))+(Math.pow(princesa.getY()-this.getY(), 2)));
+		
+		if(distancia<=50 ) {
+			
+			return true;
+		}else {
+			return false;
+		}
+	}
 	public void avanzar() {
 		if(this.x>1) {
 		this.x=x-0.5;
@@ -50,6 +64,24 @@ public class Obstaculo {
 
 		this.alto=100;
 		this.y=400;
+	}
+	public void setHaceDaño(boolean x) {
+		this.haceDaño = x;
+	}
+	public boolean getHaceDaño() {
+		return this.haceDaño;
+	}
+	public double getX() {
+		return x;
+	}
+	public void setX(double x) {
+		this.x = x;
+	}
+	public double getY() {
+		return y;
+	}
+	public void setY(double y) {
+		this.y = y;
 	}
 	
 }

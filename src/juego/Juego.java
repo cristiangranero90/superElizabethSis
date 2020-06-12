@@ -24,7 +24,7 @@ public class Juego extends InterfaceJuego
 	private Obstaculo [] obstaculos;
 	private Random r;
 	private Color []c;
-	String tocado;
+	
 	
 	
 	// agregar obstaculos;
@@ -174,22 +174,38 @@ public class Juego extends InterfaceJuego
 		this.entorno.iniciar();
 	}
 
+	
 	public void tick()
 	{
 		entorno.dibujarImagen(fondo, 0, 0, 0);
 
 
-		if(!this.ganado()) {
+		if(!this.ganado() && princesa.getVidas()>0)  {
 
 
 			for(int i=0;i<this.obstaculos.length;i++) {
+				
+				if(!this.obstaculos[i].colisionPrincesa(princesa)){
+					this.obstaculos[i].setHaceDaño(true);
+				}
 				this.obstaculos[i].dibujarse(entorno);
 				this.obstaculos[i].avanzar();
+				
+				
+
+				if(this.obstaculos[i].colisionPrincesa(princesa) && this.obstaculos[i].getHaceDaño()  ) {
+					this.princesa.setVidas(princesa.getVidas()-1);
+					this.obstaculos[i].setHaceDaño(false);
+				}
+				
 			}
 
 			for(int i=0;i<this.soldados.length;i++) {
 				if(this.soldados[i]!= null) 
 				{
+					if(!this.soldados[i].colisionPrincesa(princesa) && this.soldados[i]!=null){
+						this.soldados[i].setHaceDaño(true);
+					}
 					this.soldados[i].dibujarse(entorno);
 					this.soldados[i].avanzar();
 					
@@ -209,6 +225,13 @@ public class Juego extends InterfaceJuego
 					this.bala=null;
 					this.disparo=false;
 				}
+				
+				if(this.soldados[i]!=null && this.soldados[i].colisionPrincesa(princesa) && this.soldados[i].getHaceDaño()  ) {
+					princesa.setVidas(princesa.getVidas()-1);
+					this.soldados[i].setHaceDaño(false);
+				}
+				
+				
 			
 				
 			}
@@ -257,7 +280,14 @@ public class Juego extends InterfaceJuego
 
 		if(entorno.estaPresionada(entorno.TECLA_DERECHA)) 
 			princesa.avanzar();
-		}else
+		}
+		
+		else if(princesa.getVidas()==0) {
+			entorno.cambiarFont("Arial", 100, Color.BLUE);
+			entorno.escribirTexto("Perdiste!!!! ", 200, 300);
+		}
+		
+		else 
 
 		{
 			entorno.cambiarFont("Arial", 100, Color.RED);

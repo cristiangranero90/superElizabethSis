@@ -12,7 +12,7 @@ public class Soldado {
 	private double y;
 	private double angulo;
 	private Image imagen;
-	
+	private boolean haceDaño;
 	
 	public Soldado(double x, double y) {
 		this.x=x;
@@ -104,6 +104,12 @@ public class Soldado {
 		this.imagen = imagen;
 	}
 
+	public void setHaceDaño(boolean x) {
+		this.haceDaño = x;
+	}
+	public boolean getHaceDaño() {
+		return this.haceDaño;
+	}
 	
 	
 	
