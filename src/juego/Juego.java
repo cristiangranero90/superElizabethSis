@@ -85,6 +85,7 @@ public class Juego extends InterfaceJuego
 		}
 
 	}
+	//muestra y verifica las colisiones de obstaculos
 	public void muestraObstaculos() {
 
 		for(int i=0;i<this.obstaculos.length;i++) {
@@ -104,6 +105,7 @@ public class Juego extends InterfaceJuego
 			
 		}
 	}
+	//muestra y verifica las colisiones de soldados
 	public void muestraSoldados() {
 		
 		for(int i=0;i<this.soldados.length;i++) {
@@ -176,10 +178,6 @@ public class Juego extends InterfaceJuego
 				this.verificaDisparo();
 				this.verificaSalto();
 		
-				
-				
-				
-				
 	//lectura de teclado
 		
 		
@@ -187,9 +185,7 @@ public class Juego extends InterfaceJuego
 				
 				this.bala = new Bala(princesa.getX(), princesa.getY());
 				princesa.setBalas(princesa.getBalas()-1);
-				this.disparo=true;
-				
-				
+				this.disparo=true;		
 		}
 		
 		if (entorno.estaPresionada(entorno.TECLA_ARRIBA ) && !this.salto && princesa.getY()>385 ) 
@@ -204,26 +200,26 @@ public class Juego extends InterfaceJuego
 		}
 		
 		else if(princesa.getVidas()==0) {
-			entorno.cambiarFont("Arial", 100, Color.BLUE);
-			entorno.escribirTexto("Perdiste!!!! ", 200, 300);
+			entorno.cambiarFont("Impact", 120, Color.BLACK);
+			entorno.escribirTexto("GameOver", 160, 300);
 		}
 		
 		else 
 
 		{
-			entorno.cambiarFont("Arial", 100, Color.RED);
-			entorno.escribirTexto("Ganaste!!!! ", 200, 300);
+			entorno.cambiarFont("Impact", 120, Color.BLACK);
+		
+			entorno.escribirTexto("Ganaste!!!! ", 160, 300);
 		}
 
-		
-		entorno.cambiarFont("Arial", 20, Color.BLACK);
+		entorno.cambiarFont("Impact", 20, Color.BLACK);
 		entorno.escribirTexto("Puntos: "+this.getPuntos(), 600, 30);
 		entorno.escribirTexto("Vidas: "+princesa.getVidas() , 600, 50);
 		entorno.escribirTexto("Balas: "+princesa.getBalas(), 600, 70);
 		entorno.escribirTexto("Soldados: "+this.cantidadSoldados , 600, 90);
-
-	
+		
 	}
+
 	
 	public Entorno getEntorno() {
 		return entorno;
