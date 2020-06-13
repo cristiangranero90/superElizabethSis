@@ -27,7 +27,7 @@ public class Princesa {
 		this.x = x;
 		this.y = y;
 		this.vidas=vidas;
-		this.balas=20;
+		this.balas=200;
 		
 		//Carga de nuevas imagenes
 		this.derecha = Herramientas.cargarImagen("caminando1.png");
@@ -65,7 +65,7 @@ public class Princesa {
 	public void bajar(Entorno entorno) { //Recibe entorno para poder dibujar el salto
 		if(this.y<=385) {
 			this.y=this.y+4;
-			entorno.dibujarImagen(this.saltando2, this.x, this.y, this.angulo, 1.8);
+			entorno.dibujarImagen(this.saltando1, this.x, this.y, this.angulo, 1.8);
 		}
 	}
 

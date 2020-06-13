@@ -22,72 +22,63 @@ public class Juego extends InterfaceJuego
 	private int puntos;
 	private int cantidadSoldados;
 	private Obstaculo [] obstaculos;
-	private Random r;
+	
 	private Color []c;
-	
-	
 	
 	Juego()
 	
-	
 	{
+		
 		this.c= new Color [] {Color.BLACK,Color.blue, Color.white, Color.yellow, Color.cyan};
 		// Inicializa el objeto entorno
 		
 		entorno = new Entorno(this, "Super Elizabeth Sis - Grupo 2 - v1", 800, 600);
 		
-		fondo = Herramientas.cargarImagen("fondo.jpg");
+		fondo = Herramientas.cargarImagen("fondo2.jpg");
 		
-		princesa = new Princesa(200, 385, 5);	
+		princesa = new Princesa(200, 385, 3);	
 	
 		this.crearSoldados();
 		this.creaObstaculos();
 
 		this.disparo=false;
 		this.salto=false;
-	
 		this.entorno.iniciar();
+		
 	}
 
-	//método crea Soldados
 	public void crearSoldados() {
 		int j=800;
-		
+		Random r = new Random();
 		this.soldados = new Soldado[15];
 		
 		for(int i=0;i<this.soldados.length;i++) {
 			this.soldados[i]=new Soldado(j,385);
-			j=j+200;
+			j=j+200+(100*r.nextInt(4));
+			
 			this.setCantidadSoldados(this.getCantidadSoldados()+1);
 		}
-	}
-	//crea Obstaculos
-	public void creaObstaculos() {
 		
-		r = new Random();
-
+	}
+	
+	public void creaObstaculos() {
+	Random r = new Random();
 		int a=800; //variable para que aparezcan los obstaculos.
-		int k;
-		this.obstaculos= new Obstaculo[20];
+		
+		this.obstaculos= new Obstaculo[5];
 		
 		for(int i =0;i<this.obstaculos.length;i++) {
-			k=r.nextInt(3);
 		
-			if(k==2) {
-			this.obstaculos[i]=new Obstaculo(a,c[r.nextInt(4)],true);
-			}else {
 				this.obstaculos[i]=new Obstaculo(a,c[r.nextInt(4)],false);
-			}
-			//esta es la separacion de cada obstaculo. Como vuelven a empezar desde atras, hay que calcular para
-			//que no se solapen entre si.
-			a=a+350; 
 			
-		}
 
+			a=a+200; 
+		}
+		
 	}
 	//muestra y verifica las colisiones de obstaculos
 	public void muestraObstaculos() {
-
+		
 		for(int i=0;i<this.obstaculos.length;i++) {
 			
 			if(!this.obstaculos[i].colisionPrincesa(princesa)){
@@ -96,15 +87,31 @@ public class Juego extends InterfaceJuego
 			this.obstaculos[i].dibujarse(entorno);
 			this.obstaculos[i].avanzar();
 			
-			
-
 			if(this.obstaculos[i].colisionPrincesa(princesa) && this.obstaculos[i].getHaceDaño()  ) {
 				this.princesa.setVidas(princesa.getVidas()-1);
 				this.obstaculos[i].setHaceDaño(false);
 			}
+			if(this.obstaculos[i].getCrece() && this.obstaculos[i].getX()<50) {
+				this.obstaculos[i].setCrece(false);
+				this.obstaculos[i].achicarse();
+			}
+
+
+			}	
+	}
+	public void crecerObstaculos() {
+		Random r = new Random();
+		int j;
+		for(int i=0;i<this.obstaculos.length;i++) {
+			j=r.nextInt(3);
 			
+			if(this.obstaculos[i].getX()<400 && this.obstaculos[i].getX()>397 && j==2) {
+				
+				this.obstaculos[i].setCrece(true);	
+			}
 		}
 	}
+	
 	//muestra y verifica las colisiones de soldados
 	public void muestraSoldados() {
 		
@@ -117,12 +124,15 @@ public class Juego extends InterfaceJuego
 				this.soldados[i].dibujarse(entorno);
 				this.soldados[i].avanzar();
 				
+				
+				
 			}
+			
 			if(this.bala!=null && this.soldados[i]!=null && this.soldados[i].colisionBala(this.bala)){
 				this.soldados[i]=null;
 				this.bala=null;
 
-				this.setPuntos(this.getPuntos()+10);
+				this.setPuntos(this.getPuntos()+5);
 				this.setCantidadSoldados(this.getCantidadSoldados()-1);
 				this.disparo=false;
 
@@ -154,6 +164,7 @@ public class Juego extends InterfaceJuego
 			
 		}
 	}
+	
 	public void verificaDisparo() {
 			if(this.disparo && this.bala!=null) {
 	
@@ -177,12 +188,14 @@ public class Juego extends InterfaceJuego
 		
 				this.verificaDisparo();
 				this.verificaSalto();
+				this.crecerObstaculos();
 		
 	//lectura de teclado
 		
 		
 		if (entorno.estaPresionada(entorno.TECLA_ESPACIO) && this.disparo==false && princesa.getBalas()>0 && !entorno.estaPresionada(entorno.TECLA_IZQUIERDA)) {
-				
+			
+			
 				this.bala = new Bala(princesa.getX(), princesa.getY());
 				princesa.setBalas(princesa.getBalas()-1);
 				this.disparo=true;		
@@ -293,7 +306,7 @@ public class Juego extends InterfaceJuego
 	
 	public boolean ganado() {
 		
-	if(this.puntos==100) {
+	if(this.puntos==20) {
 		return true;
 	}
 	return false;

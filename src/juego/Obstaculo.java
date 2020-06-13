@@ -19,7 +19,7 @@ public class Obstaculo {
 	
 	public Obstaculo(double x, Color color, boolean crece ) {
 		this.x=x;
-		this.y=422;
+		this.y=425;
 		this.ancho=50;
 		this.alto=50;
 		this.angulo=0;
@@ -31,11 +31,13 @@ public class Obstaculo {
 	public void dibujarse(Entorno entorno) {
 		
 		entorno.dibujarRectangulo(this.x, this.y, this.ancho, this.alto, this.angulo, this.color);
-		if(this.crece && this.x<400) {
+		if(this.crece) {
 			this.crecer();
 		}
 		
+		
 	}
+	
 
 	public boolean colisionPrincesa(Princesa princesa) {
 		
@@ -50,20 +52,22 @@ public class Obstaculo {
 		}
 	}
 	public void avanzar() {
-		if(this.x>1) {
-		this.x=x-0.5;
+		if(this.x>0) {
+		this.x=x-1;
 		}
-		
-		else {
-		this.x=7000;
+		else{
+		this.x=1000;
 		
 		}
 	}
 	public void crecer() {
 		
-
 		this.alto=100;
 		this.y=400;
+	}
+	public void achicarse() {
+		this.alto=50;
+		this.y=425;
 	}
 	public void setHaceDaño(boolean x) {
 		this.haceDaño = x;
@@ -83,5 +87,12 @@ public class Obstaculo {
 	public void setY(double y) {
 		this.y = y;
 	}
+	public boolean getCrece() {
+		return crece;
+	}
+	public void setCrece(boolean crece) {
+		this.crece = crece;
+	}
+	
 	
 }

@@ -1,6 +1,7 @@
 package juego;
 
 import java.awt.Image;
+import java.util.Random;
 
 import entorno.Entorno;
 import entorno.Herramientas;
@@ -13,20 +14,22 @@ public class Soldado {
 	private double angulo;
 	private Image imagen;
 	private boolean haceDaño;
+	private boolean salto;
 	
 	public Soldado(double x, double y) {
 		this.x=x;
 		this.y=y;
-		
+
 		
 		imagen = Herramientas.cargarImagen("soldado.png");
 		
 	}
 	public void avanzar() {
+	
 		if(this.getX()>=0) {
-			this.setX(this.getX()-1);
+			this.setX(this.getX()-1.5);
+			
 		}
-		
 		else {
 			this.setX(3000);
 		}
@@ -39,12 +42,19 @@ public class Soldado {
 		
 	}
 	
-	public void desaparece() {
-		
-		
-	}
-	
-	
+	public void saltar(Entorno entorno) { //Recibe entorno para poder dibujar el salto
+		if(this.y>280) {
+			this.y= this.y-6;
+			
+		}
+		}
+		public void bajar(Entorno entorno) { //Recibe entorno para poder dibujar el salto
+			if(this.y<=385) {
+				this.y=385;
+				this.y=this.y+1;
+			
+			}
+		}
 	
 	public boolean colisionPrincesa(Princesa princesa) {
 		
@@ -109,6 +119,12 @@ public class Soldado {
 	}
 	public boolean getHaceDaño() {
 		return this.haceDaño;
+	}
+	public void setSalto(boolean salto) {
+		this.salto=salto;
+	}
+	public boolean getSalto() {
+		return this.salto;
 	}
 	
 	
