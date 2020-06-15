@@ -32,6 +32,7 @@ public class Juego extends InterfaceJuego
 	private Clip mario;
 	private Clip disparos;
 	private Clip enemigo;
+	private boolean sonidoGameOver;
 	
 	
 	Juego()
@@ -46,7 +47,7 @@ public class Juego extends InterfaceJuego
 		
 		suelo = Herramientas.cargarImagen("suelo.png");
 		fondomov = new FondoMov(800,600);
-		princesa = new Princesa(200, 385, 3);	
+		princesa = new Princesa(200, 400, 3);	
 		setGameOver(Herramientas.cargarSonido("gameOver.wav"));
 		setVida(Herramientas.cargarSonido("vida.wav"));
 		setJump(Herramientas.cargarSonido("jump.wav"));
@@ -54,7 +55,7 @@ public class Juego extends InterfaceJuego
 		//setEnemigo(Herramientas.cargarSonido("enemigo.wav"));
 		//setDisparos(Herramientas.cargarSonido("disparos.wav"));
 		
-		
+		this.sonidoGameOver=false;
 		this.crearSoldados();
 		this.creaObstaculos();
 		this.cearHongos();
@@ -63,6 +64,7 @@ public class Juego extends InterfaceJuego
 	
 		
 		this.entorno.iniciar();
+		
 		
 	}
 	//Da vidas a la princesa
@@ -96,7 +98,7 @@ public class Juego extends InterfaceJuego
 		this.soldados = new Soldado[15];
 		
 		for(int i=0;i<this.soldados.length;i++) {
-			this.soldados[i]=new Soldado(j,385);
+			this.soldados[i]=new Soldado(j,400);
 			j=j+200+(100*r.nextInt(4));
 			
 			this.setCantidadSoldados(this.getCantidadSoldados()+1);
@@ -286,7 +288,7 @@ public class Juego extends InterfaceJuego
 		if (entorno.estaPresionada(entorno.TECLA_ARRIBA ) && !this.salto && princesa.getY()>385 ) {
 			
 			this.salto=true;
-		Herramientas.play("jump.wav");
+			Herramientas.play("jump.wav");
 		}
 		
 		if(entorno.estaPresionada(entorno.TECLA_IZQUIERDA)) 
@@ -295,6 +297,7 @@ public class Juego extends InterfaceJuego
 		if(entorno.estaPresionada(entorno.TECLA_DERECHA)) 
 			princesa.avanzar();
 		}
+		
 		
 		else if(princesa.getVidas()==0) {
 			entorno.cambiarFont("Impact", 120, Color.GRAY);
