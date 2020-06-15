@@ -46,7 +46,7 @@ public class Juego extends InterfaceJuego
 		
 		
 		suelo = Herramientas.cargarImagen("suelo.png");
-		fondomov = new FondoMov(800,600);
+		fondomov = new FondoMov(0,530);
 		princesa = new Princesa(200, 400, 3);	
 		setGameOver(Herramientas.cargarSonido("gameOver.wav"));
 		setVida(Herramientas.cargarSonido("vida.wav"));
@@ -256,9 +256,14 @@ public class Juego extends InterfaceJuego
 	
 	public void tick()
 	{
-		entorno.dibujarImagen(suelo, 0, 530, 0, 3.5);
+		//entorno.dibujarImagen(suelo, 0, 530, 0, 3.5);
 		fondomov.dibujarse(entorno);
-		this.fondomov.avanzar();
+		
+		if(princesa.getVidas() != 0) {
+			fondomov.avanzar();
+		}
+		
+		
 		
 		
 		if(!this.ganado() && princesa.getVidas()>0)  {
