@@ -22,6 +22,13 @@ public class Princesa {
 	 private Image saltando1;
 	 private Image saltando2;
 	 private Image disparando;
+	 
+	 //Caminando ------------------- Efecto
+	 private Image caminando1;
+	 private Image caminando2;
+	 private Image caminando3;
+	 private Image caminando4;
+	 private Image caminando5;
 
 	public Princesa(int x, int y, int vidas){
 		this.x = x;
@@ -36,9 +43,16 @@ public class Princesa {
 		this.saltando1 = Herramientas.cargarImagen("saltando1.png");
 		this.saltando2 = Herramientas.cargarImagen("saltando2.png");
 		this.disparando = Herramientas.cargarImagen("disparando.png");
+		
+		//Nuevos Sprites
+		this.caminando1 = Herramientas.cargarImagen("caminando1.png");
+		this.caminando2 = Herramientas.cargarImagen("Sprites princesa/caminando2.png");
+		this.caminando3 = Herramientas.cargarImagen("Sprites princesa/caminando3.png");
+		this.caminando4 = Herramientas.cargarImagen("Sprites princesa/caminando4.png");
+		this.caminando5 = Herramientas.cargarImagen("Sprites princesa/caminando5.png");
 	}
 
-	public void dibujarse(Entorno entorno) { //Se agregaron los sprites a dibujarse
+	public void dibujarse(Entorno entorno, int animar) { //Se agregaron los sprites a dibujarse
 		
 			if (entorno.estaPresionada(entorno.TECLA_DERECHA)) {
 				entorno.dibujarImagen(this.derecha , this.x, this.y, this.angulo, 1.8);
@@ -51,7 +65,23 @@ public class Princesa {
 			}
 			
 			else {
-				entorno.dibujarImagen(this.quieta, this.x, this.y, this.angulo, 1.8);
+				
+				if (animar >= 0 && animar < 20) {
+					entorno.dibujarImagen(this.caminando1, this.x, this.y, this.angulo, 1.8);
+				}
+				else if (animar >= 20 && animar < 40) {
+					entorno.dibujarImagen(this.caminando2, this.x, this.y, this.angulo, 1.8);
+				}
+				else if (animar >= 40 && animar < 60) {
+					entorno.dibujarImagen(this.caminando3, this.x, this.y, this.angulo, 1.8);
+				}
+				else if (animar >= 60 && animar < 80) {
+					entorno.dibujarImagen(this.caminando4, this.x, this.y, this.angulo, 1.8);
+				}
+				else {
+					entorno.dibujarImagen(this.caminando5, this.x, this.y, this.angulo, 1.8);
+				}
+				
 			}
 		
 	}

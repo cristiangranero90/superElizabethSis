@@ -34,6 +34,7 @@ public class Juego extends InterfaceJuego
 	private Clip enemigo;
 	private boolean sonidoGameOver;
 	
+	private int animar;
 	
 	Juego()
 	
@@ -61,7 +62,8 @@ public class Juego extends InterfaceJuego
 		this.cearHongos();
 		this.disparo=false;
 		this.salto=false;
-	
+		
+		animar = 0;
 		
 		this.entorno.iniciar();
 		
@@ -256,10 +258,15 @@ public class Juego extends InterfaceJuego
 	
 	public void tick()
 	{
+		
+		if (animar >= 100) {
+			animar = 0;
+		}
+		animar++;
 		//entorno.dibujarImagen(suelo, 0, 530, 0, 3.5);
 		fondomov.dibujarse(entorno);
 		
-		if(princesa.getVidas() != 0) {
+		if(princesa.getVidas() != 0 && !this.ganado()) {
 			fondomov.avanzar();
 		}
 		
@@ -272,7 +279,7 @@ public class Juego extends InterfaceJuego
 				this.muestraSoldados();
 				this.muestraHongos();
 				
-				princesa.dibujarse(entorno);
+				princesa.dibujarse(entorno, animar);
 		
 				this.verificaDisparo();
 				
