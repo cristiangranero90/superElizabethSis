@@ -60,7 +60,9 @@ public class Princesa {
 		this.y= this.y - 6;
 		entorno.dibujarImagen(this.saltando1, this.x, this.y, this.angulo, 1.8);
 		
+		
 	}
+	
 	}
 	public void bajar(Entorno entorno) { //Recibe entorno para poder dibujar el salto
 		if(this.y<=385) {

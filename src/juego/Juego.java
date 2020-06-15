@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Image;
 import java.util.Random;
 
+import javax.sound.sampled.Clip;
 import entorno.Entorno;
 import entorno.Herramientas;
 import entorno.InterfaceJuego;
@@ -18,12 +19,20 @@ public class Juego extends InterfaceJuego
 	private Bala bala;
 	private Soldado [] soldados;
 	private boolean disparo;
-	private Image fondo;
+	private Image suelo;
 	private int puntos;
 	private int cantidadSoldados;
 	private Obstaculo [] obstaculos;
-	
+	private Hongo [] hongo;
 	private Color []c;
+	private FondoMov fondomov;
+	private Clip gameOver;
+	private Clip vida;
+	private Clip jump;
+	private Clip mario;
+	private Clip disparos;
+	private Clip enemigo;
+	
 	
 	Juego()
 	
@@ -34,18 +43,53 @@ public class Juego extends InterfaceJuego
 		
 		entorno = new Entorno(this, "Super Elizabeth Sis - Grupo 2 - v1", 800, 600);
 		
-		fondo = Herramientas.cargarImagen("fondo2.jpg");
 		
+		suelo = Herramientas.cargarImagen("suelo.png");
+		fondomov = new FondoMov(800,600);
 		princesa = new Princesa(200, 385, 3);	
-	
+		setGameOver(Herramientas.cargarSonido("gameOver.wav"));
+		setVida(Herramientas.cargarSonido("vida.wav"));
+		setJump(Herramientas.cargarSonido("jump.wav"));
+		setMario(Herramientas.cargarSonido("mario.wav"));
+		//setEnemigo(Herramientas.cargarSonido("enemigo.wav"));
+		//setDisparos(Herramientas.cargarSonido("disparos.wav"));
+		
+		
 		this.crearSoldados();
 		this.creaObstaculos();
-
+		this.cearHongos();
 		this.disparo=false;
 		this.salto=false;
+	
+		
 		this.entorno.iniciar();
 		
 	}
+	//Da vidas a la princesa
+	private void cearHongos() {
+		int v=1000;
+		
+		this.hongo = new Hongo[3];
+		
+		for(int i=0;i<this.hongo.length;i++) {
+			this.hongo[i]=new Hongo(v,200);
+			v=v+600;
+			this.setCantidadHongos(this.getCantidadHongos()+1);
+		}	
+	}
+
+
+	private int getCantidadHongos() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	private void setCantidadHongos(int i) {
+		// TODO Auto-generated method stub
+		
+		
+	}
+
 
 	public void crearSoldados() {
 		int j=800;
@@ -72,10 +116,34 @@ public class Juego extends InterfaceJuego
 				this.obstaculos[i]=new Obstaculo(a,c[r.nextInt(4)],false);
 			
 
-			a=a+200; 
+			a=a+250; 
 		}
 		
 	}
+	//muestra hongos
+	public void muestraHongos() {
+		for(int i=0;i<this.hongo.length;i++) {
+			if(this.princesa!= null) 
+			{
+				if(!this.hongo[i].colisionPrincesa(princesa)){
+					this.hongo[i].setganarVida(true);
+					
+				}
+				this.hongo[i].dibujarse(entorno);
+				this.hongo[i].avanzar();
+				
+			if(this.princesa!=null && this.hongo[i].colisionPrincesa(princesa) && this.hongo[i].getganarVida()){
+				princesa.setVidas(princesa.getVidas()+1);
+				Herramientas.play("vida.wav");
+				this.hongo[i].setganarVida(false);
+			
+			}
+				
+				
+			}
+		}
+	}
+
 	//muestra y verifica las colisiones de obstaculos
 	public void muestraObstaculos() {
 		
@@ -83,13 +151,16 @@ public class Juego extends InterfaceJuego
 			
 			if(!this.obstaculos[i].colisionPrincesa(princesa)){
 				this.obstaculos[i].setHaceDaño(true);
+				
 			}
 			this.obstaculos[i].dibujarse(entorno);
 			this.obstaculos[i].avanzar();
 			
 			if(this.obstaculos[i].colisionPrincesa(princesa) && this.obstaculos[i].getHaceDaño()  ) {
 				this.princesa.setVidas(princesa.getVidas()-1);
+				//Herramientas.play("enemigos.wav");
 				this.obstaculos[i].setHaceDaño(false);
+				
 			}
 			if(this.obstaculos[i].getCrece() && this.obstaculos[i].getX()<50) {
 				this.obstaculos[i].setCrece(false);
@@ -107,7 +178,7 @@ public class Juego extends InterfaceJuego
 			
 			if(this.obstaculos[i].getX()<400 && this.obstaculos[i].getX()>397 && j==2) {
 				
-				this.obstaculos[i].setCrece(true);	
+				this.obstaculos[i].setCrece(true);
 			}
 		}
 	}
@@ -155,6 +226,7 @@ public class Juego extends InterfaceJuego
 	public void verificaSalto() {
 		if(this.salto) {
 			princesa.saltar(entorno);
+			
 		}
 		if(princesa.getY()<202) {
 			this.salto=false;
@@ -162,7 +234,7 @@ public class Juego extends InterfaceJuego
 		if(!this.salto) {
 			princesa.bajar(entorno);
 			
-		}
+	}
 	}
 	
 	public void verificaDisparo() {
@@ -174,22 +246,28 @@ public class Juego extends InterfaceJuego
 		}
 	}
 	
+	
+	
 	public void tick()
 	{
-		entorno.dibujarImagen(fondo, 0, 0, 0);
-
-
+		entorno.dibujarImagen(suelo, 0, 530, 0, 3.5);
+		fondomov.dibujarse(entorno);
+		this.fondomov.avanzar();
+		
+		
 		if(!this.ganado() && princesa.getVidas()>0)  {
 
 				this.muestraObstaculos();
 				this.muestraSoldados();
-			
+				this.muestraHongos();
+				
 				princesa.dibujarse(entorno);
 		
 				this.verificaDisparo();
+				
 				this.verificaSalto();
 				this.crecerObstaculos();
-		
+				
 	//lectura de teclado
 		
 		
@@ -204,7 +282,6 @@ public class Juego extends InterfaceJuego
 		if (entorno.estaPresionada(entorno.TECLA_ARRIBA ) && !this.salto && princesa.getY()>385 ) 
 			this.salto=true;
 		
-		
 		if(entorno.estaPresionada(entorno.TECLA_IZQUIERDA)) 
 			princesa.retroceder();
 
@@ -213,24 +290,25 @@ public class Juego extends InterfaceJuego
 		}
 		
 		else if(princesa.getVidas()==0) {
-			entorno.cambiarFont("Impact", 120, Color.BLACK);
+			entorno.cambiarFont("Impact", 120, Color.GRAY);
 			entorno.escribirTexto("GameOver", 160, 300);
+	
 		}
 		
 		else 
 
 		{
-			entorno.cambiarFont("Impact", 120, Color.BLACK);
+			
+			entorno.cambiarFont("Impact", 120, Color.BLUE);
 		
 			entorno.escribirTexto("Ganaste!!!! ", 160, 300);
 		}
 
-		entorno.cambiarFont("Impact", 20, Color.BLACK);
+		entorno.cambiarFont("Impact", 20, Color.WHITE);
 		entorno.escribirTexto("Puntos: "+this.getPuntos(), 600, 30);
 		entorno.escribirTexto("Vidas: "+princesa.getVidas() , 600, 50);
 		entorno.escribirTexto("Balas: "+princesa.getBalas(), 600, 70);
 		entorno.escribirTexto("Soldados: "+this.cantidadSoldados , 600, 90);
-		
 	}
 
 	
@@ -257,10 +335,12 @@ public class Juego extends InterfaceJuego
 	}
 
 	public boolean isSalto() {
+		
 		return salto;
 	}
 
 	public void setSalto(boolean salto) {
+		
 		this.salto = salto;
 	}
 
@@ -289,11 +369,11 @@ public class Juego extends InterfaceJuego
 	}
 
 	public Image getFondo() {
-		return fondo;
+		return suelo;
 	}
 
-	public void setFondo(Image fondo) {
-		this.fondo = fondo;
+	public void setFondo(Image suelo) {
+		this.suelo = suelo;
 	}
 
 	public int getPuntos() {
@@ -317,5 +397,43 @@ public class Juego extends InterfaceJuego
 	public static void main(String[] args)
 	{
 		Juego juego = new Juego();
+		
+	
+	}
+	public Clip getGameOver() {
+		return gameOver;
+	}
+	public void setGameOver(Clip gameOver) {
+		this.gameOver = gameOver;
+	}
+	public Clip getVida() {
+		return vida;
+	}
+	public void setVida(Clip vida) {
+		this.vida = vida;
+	}
+	public Clip getJump() {
+		return jump;
+	}
+	public void setJump(Clip jump) {
+		this.jump = jump;
+	}
+	public Clip getMario() {
+		return mario;
+	}
+	public void setMario(Clip mario) {
+		this.mario = mario;
+	}
+	public Clip getDisparos() {
+		return disparos;
+	}
+	public void setDisparos(Clip disparos) {
+		this.disparos = disparos;
+	}
+	public Clip getEnemigo() {
+		return enemigo;
+	}
+	public void setEnemigo(Clip enemigo) {
+		this.enemigo = enemigo;
 	}
 }

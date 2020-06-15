@@ -6,6 +6,7 @@ import java.util.Random;
 import entorno.Entorno;
 import entorno.Herramientas;
 
+@SuppressWarnings("unused")
 public class Soldado {
 
 	
@@ -15,6 +16,7 @@ public class Soldado {
 	private Image imagen;
 	private boolean haceDaño;
 	private boolean salto;
+	
 	
 	public Soldado(double x, double y) {
 		this.x=x;
@@ -64,6 +66,7 @@ public class Soldado {
 		if(distancia<=50 ) {
 			
 			return true;
+			
 		}else {
 			return false;
 		}
@@ -126,6 +129,7 @@ public class Soldado {
 	public boolean getSalto() {
 		return this.salto;
 	}
+	
 	
 	
 	
