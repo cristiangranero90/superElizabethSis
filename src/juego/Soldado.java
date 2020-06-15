@@ -130,14 +130,6 @@ public class Soldado {
 		this.angulo = angulo;
 	}
 
-	public Image getImagen() {
-		return imagen;
-	}
-
-	public void setImagen(Image imagen) {
-		this.imagen = imagen;
-	}
-
 	public void setHaceDaño(boolean x) {
 		this.haceDaño = x;
 	}
