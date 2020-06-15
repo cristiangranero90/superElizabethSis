@@ -196,7 +196,7 @@ public class Juego extends InterfaceJuego
 				if(!this.soldados[i].colisionPrincesa(princesa) && this.soldados[i]!=null){
 					this.soldados[i].setHaceDaño(true);
 				}
-				this.soldados[i].dibujarse(entorno);
+				this.soldados[i].dibujarse(entorno, animar);
 				this.soldados[i].avanzar();
 				
 				
