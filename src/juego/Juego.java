@@ -87,7 +87,6 @@ public class Juego extends InterfaceJuego
 	private void setCantidadHongos(int i) {
 		// TODO Auto-generated method stub
 		
-		
 	}
 
 

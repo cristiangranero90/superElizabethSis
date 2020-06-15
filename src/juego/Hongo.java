@@ -18,9 +18,6 @@ public class Hongo {
 	public Hongo(double x, double y) {
 		this.x=x;
 		this.y=y;
-
-		
-		
 		imagen = Herramientas.cargarImagen("Hongo.png");
 	}
 
