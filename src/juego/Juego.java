@@ -156,8 +156,9 @@ public class Juego extends InterfaceJuego
 			this.obstaculos[i].avanzar();
 			
 			if(this.obstaculos[i].colisionPrincesa(princesa) && this.obstaculos[i].getHaceDaño()  ) {
+				Herramientas.play("enemigo.wav");
 				this.princesa.setVidas(princesa.getVidas()-1);
-				//Herramientas.play("enemigos.wav");
+				
 				this.obstaculos[i].setHaceDaño(false);
 				
 			}
@@ -215,6 +216,7 @@ public class Juego extends InterfaceJuego
 			}
 			
 			if(this.soldados[i]!=null && this.soldados[i].colisionPrincesa(princesa) && this.soldados[i].getHaceDaño()  ) {
+				Herramientas.play("enemigo.wav");
 				princesa.setVidas(princesa.getVidas()-1);
 				this.soldados[i].setHaceDaño(false);
 			}
@@ -223,7 +225,9 @@ public class Juego extends InterfaceJuego
 		
 	}
 	public void verificaSalto() {
-		if(this.salto) {
+		
+		
+		if(this.salto ) {
 			princesa.saltar(entorno);
 			
 		}
@@ -239,6 +243,7 @@ public class Juego extends InterfaceJuego
 	public void verificaDisparo() {
 			if(this.disparo && this.bala!=null) {
 	
+			
 			this.bala.dibujarse(entorno);
 			this.bala.avanzar();
 	
@@ -272,14 +277,17 @@ public class Juego extends InterfaceJuego
 		
 		if (entorno.estaPresionada(entorno.TECLA_ESPACIO) && this.disparo==false && princesa.getBalas()>0 && !entorno.estaPresionada(entorno.TECLA_IZQUIERDA)) {
 			
-			
+			 	Herramientas.play("disparos.wav");
 				this.bala = new Bala(princesa.getX(), princesa.getY());
 				princesa.setBalas(princesa.getBalas()-1);
 				this.disparo=true;		
 		}
 		
-		if (entorno.estaPresionada(entorno.TECLA_ARRIBA ) && !this.salto && princesa.getY()>385 ) 
+		if (entorno.estaPresionada(entorno.TECLA_ARRIBA ) && !this.salto && princesa.getY()>385 ) {
+			
 			this.salto=true;
+		Herramientas.play("jump.wav");
+		}
 		
 		if(entorno.estaPresionada(entorno.TECLA_IZQUIERDA)) 
 			princesa.retroceder();
