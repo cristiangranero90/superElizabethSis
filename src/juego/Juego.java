@@ -202,6 +202,7 @@ public class Juego extends InterfaceJuego
 			}
 			
 			if(this.bala!=null && this.soldados[i]!=null && this.soldados[i].colisionBala(this.bala)){
+				Herramientas.play("enemigo.wav");
 				this.soldados[i]=null;
 				this.bala=null;
 
@@ -256,15 +257,12 @@ public class Juego extends InterfaceJuego
 	
 	public void tick()
 	{
-		//entorno.dibujarImagen(suelo, 0, 530, 0, 3.5);
+		
 		fondomov.dibujarse(entorno);
 		
 		if(princesa.getVidas() != 0) {
 			fondomov.avanzar();
 		}
-		
-		
-		
 		
 		if(!this.ganado() && princesa.getVidas()>0)  {
 
