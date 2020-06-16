@@ -2,7 +2,6 @@ package juego;
 
 import java.awt.Image;
 import java.util.Random;
-
 import entorno.Entorno;
 import entorno.Herramientas;
 
@@ -26,11 +25,11 @@ public class Soldado {
 	public Soldado(double x, double y) {
 		this.x=x;
 		this.y=y;
-		soldado1 = Herramientas.cargarImagen("SpritesSoldado/sold1.png");
-		soldado2 = Herramientas.cargarImagen("SpritesSoldado/sold2.png");
-		soldado3 = Herramientas.cargarImagen("SpritesSoldado/sold3.png");
-		soldado4 = Herramientas.cargarImagen("SpritesSoldado/sold4.png");
-		soldado5 = Herramientas.cargarImagen("SpritesSoldado/sold5.png");
+		this.soldado1 = Herramientas.cargarImagen("SpritesSoldado/sold1.png");
+		this.soldado2 = Herramientas.cargarImagen("SpritesSoldado/sold2.png");
+		this.soldado3 = Herramientas.cargarImagen("SpritesSoldado/sold3.png");
+		this.soldado4 = Herramientas.cargarImagen("SpritesSoldado/sold4.png");
+		this.soldado5 = Herramientas.cargarImagen("SpritesSoldado/sold5.png");
 		
 	}
 	public void avanzar() {

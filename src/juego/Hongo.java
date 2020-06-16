@@ -12,13 +12,13 @@ public class Hongo {
 	private int vida;
 	private Image imagen;
 	private boolean ganarVida;
-	
-	
-	
+
+
+
 	public Hongo(double x, double y) {
 		this.x=x;
 		this.y=y;
-		imagen = Herramientas.cargarImagen("Hongo.png");
+		this.imagen = Herramientas.cargarImagen("Hongo.png");
 	}
 
 	public void avanzar() {
@@ -27,60 +27,53 @@ public class Hongo {
 		}
 		else{
 			this.x=1000;
-	
+
+		}
 	}
+
+	public void dibujarse(Entorno entorno) {
+		entorno.dibujarImagen(imagen,this.x, this.y,this.angulo, 0.4);
 	}
 
+	public boolean colisionPrincesa(Princesa princesa) {
 		
-		public void dibujarse(Entorno entorno) {
-			
-			entorno.dibujarImagen(imagen,this.x, this.y,this.angulo, 0.4);
-			
-			}
-			
-		
+		double distancia=Math.sqrt((Math.pow((princesa.getX() - this.getX()),2))+(Math.pow(princesa.getY()-this.getY(), 2)));
+		if(distancia<=50 ) {
 
-		public boolean colisionPrincesa(Princesa princesa) {
-			
-			
-			double distancia=Math.sqrt((Math.pow((princesa.getX() - this.getX()),2))+(Math.pow(princesa.getY()-this.getY(), 2)));
-			
-			if(distancia<=50 ) {
-				
-				return true;
-			}else {
-				return false;
-			}
-	
-		
-		}
-		public double getX() {
-			return x;
-		}
-		public void setX(double x) {
-			this.x = x;
-		}
-		public double getY() {
-			return y;
-		}
-		public void setY(double y) {
-			this.y = y;
+			return true;
+		}else {
+			return false;
 		}
 
-		public int getVida() {
-			return vida;
-		}
 
-		public void setVida(int vida) {
-			this.vida = vida;
-		}
+	}
+	public double getX() {
+		return x;
+	}
+	public void setX(double x) {
+		this.x = x;
+	}
+	public double getY() {
+		return y;
+	}
+	public void setY(double y) {
+		this.y = y;
+	}
 
-		public void setganarVida(boolean x) {
-			this.ganarVida = x;
-		}
-		public boolean getganarVida() {
-			return this.ganarVida;
+	public int getVida() {
+		return vida;
+	}
 
-			
-		}
+	public void setVida(int vida) {
+		this.vida = vida;
+	}
+
+	public void setganarVida(boolean x) {
+		this.ganarVida = x;
+	}
+	public boolean getganarVida() {
+		return this.ganarVida;
+
+
+	}
 }

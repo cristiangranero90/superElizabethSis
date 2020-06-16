@@ -1,10 +1,8 @@
 package juego;
 
-
 import java.awt.Color;
 import java.awt.Image;
 import java.util.Random;
-
 import javax.sound.sampled.Clip;
 import entorno.Entorno;
 import entorno.Herramientas;
@@ -24,7 +22,6 @@ public class Juego extends InterfaceJuego
 	private int cantidadSoldados;
 	private Obstaculo [] obstaculos;
 	private Hongo [] hongo;
-	private Color []c;
 	private FondoMov fondomov;
 	private Clip gameOver;
 	private Clip vida;
@@ -32,37 +29,30 @@ public class Juego extends InterfaceJuego
 	private Clip mario;
 	private Clip disparos;
 	private Clip enemigo;
-	
 	private int animar;
 	
 	Juego()
 	
 	{
 		
-		this.c= new Color [] {Color.BLACK,Color.blue, Color.white, Color.yellow, Color.cyan};
-		// Inicializa el objeto entorno
-		
-		entorno = new Entorno(this, "Super Elizabeth Sis - Grupo 2 - v1", 800, 600);
+
+		this.entorno = new Entorno(this, "Super Elizabeth Sis - Grupo 2 - v1", 800, 600);
 		
 		
-		suelo = Herramientas.cargarImagen("suelo.png");
-		fondomov = new FondoMov(0,530);
-		princesa = new Princesa(200, 400, 3);	
+		this.suelo = Herramientas.cargarImagen("suelo.png");
+		this.fondomov = new FondoMov(0,530);
+		this.princesa = new Princesa(200, 400, 3);	
 		setGameOver(Herramientas.cargarSonido("gameOver.wav"));
 		setVida(Herramientas.cargarSonido("vida.wav"));
 		setJump(Herramientas.cargarSonido("jump.wav"));
 		setMario(Herramientas.cargarSonido("mario.wav"));
-		//setEnemigo(Herramientas.cargarSonido("enemigo.wav"));
-		//setDisparos(Herramientas.cargarSonido("disparos.wav"));
-		
+	
 		this.crearSoldados();
 		this.creaObstaculos();
 		this.cearHongos();
 		this.disparo=false;
 		this.salto=false;
-		
-		animar = 0;
-		
+		this.animar = 0;
 		this.entorno.iniciar();
 		
 		
@@ -81,16 +71,6 @@ public class Juego extends InterfaceJuego
 	}
 
 
-	private int getCantidadHongos() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	private void setCantidadHongos(int i) {
-		// TODO Auto-generated method stub
-		
-	}
-
 
 	public void crearSoldados() {
 		int j=800;
@@ -107,15 +87,14 @@ public class Juego extends InterfaceJuego
 	}
 	
 	public void creaObstaculos() {
-	Random r = new Random();
+	
 		int a=800; //variable para que aparezcan los obstaculos.
 		
 		this.obstaculos= new Obstaculo[5];
 		
 		for(int i =0;i<this.obstaculos.length;i++) {
 		
-				this.obstaculos[i]=new Obstaculo(a,c[r.nextInt(4)],false);
-			
+				this.obstaculos[i]=new Obstaculo(a,false);
 
 			a=a+250; 
 		}
@@ -124,7 +103,7 @@ public class Juego extends InterfaceJuego
 	//muestra hongos
 	public void muestraHongos() {
 		for(int i=0;i<this.hongo.length;i++) {
-			if(this.princesa!= null) 
+			if(this.princesa!= null && this.hongo[i]!=null) 
 			{
 				if(!this.hongo[i].colisionPrincesa(princesa)){
 					this.hongo[i].setganarVida(true);
@@ -133,10 +112,11 @@ public class Juego extends InterfaceJuego
 				this.hongo[i].dibujarse(entorno);
 				this.hongo[i].avanzar();
 				
-			if(this.princesa!=null && this.hongo[i].colisionPrincesa(princesa) && this.hongo[i].getganarVida()){
+			if(this.hongo[i]!=null && this.princesa!=null && this.hongo[i].colisionPrincesa(princesa) && this.hongo[i].getganarVida()){
 				princesa.setVidas(princesa.getVidas()+1);
 				Herramientas.play("vida.wav");
 				this.hongo[i].setganarVida(false);
+				this.hongo[i]=null;
 			
 			}
 				
@@ -404,7 +384,7 @@ public class Juego extends InterfaceJuego
 	
 	public boolean ganado() {
 		
-	if(this.puntos==20) {
+	if(this.puntos==50) {
 		return true;
 	}
 	return false;
@@ -454,4 +434,15 @@ public class Juego extends InterfaceJuego
 	public void setEnemigo(Clip enemigo) {
 		this.enemigo = enemigo;
 	}
+
+	private int getCantidadHongos() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	private void setCantidadHongos(int i) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

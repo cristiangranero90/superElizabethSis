@@ -1,8 +1,6 @@
 package juego;
 
-import java.awt.Color;
 import java.awt.Image;
-
 import entorno.Entorno;
 import entorno.Herramientas;
 
@@ -15,19 +13,18 @@ public class Obstaculo {
 	private boolean haceDaño;
 	private Image imagen;
 	
-	public Obstaculo(double x, Color color, boolean crece ) {
+	public Obstaculo(double x, boolean crece ) {
 		this.x=x;
 		this.y=425;
 		this.angulo=0;
-		this.crece=crece;
-			
-		imagen = Herramientas.cargarImagen("planta.png");
+		this.crece=crece;	
+		this.imagen = Herramientas.cargarImagen("planta.png");
 		
 	}
 	public void dibujarse(Entorno entorno) {
 		
-		//entorno.dibujarRectangulo(this.x, this.y, this.ancho, this.alto, this.angulo, this.color);
 		entorno.dibujarImagen(imagen,this.x, this.y,this.angulo, 0.4);
+		
 		if(this.crece) {
 			this.crecer();
 		}
