@@ -32,8 +32,8 @@ public class Juego extends InterfaceJuego
 	private Clip mario;
 	private Clip disparos;
 	private Clip enemigo;
-	private boolean sonidoGameOver;
 	
+	private int animar;
 	
 	Juego()
 	
@@ -55,13 +55,13 @@ public class Juego extends InterfaceJuego
 		//setEnemigo(Herramientas.cargarSonido("enemigo.wav"));
 		//setDisparos(Herramientas.cargarSonido("disparos.wav"));
 		
-		this.sonidoGameOver=false;
 		this.crearSoldados();
 		this.creaObstaculos();
 		this.cearHongos();
 		this.disparo=false;
 		this.salto=false;
-	
+		
+		animar = 0;
 		
 		this.entorno.iniciar();
 		
@@ -194,7 +194,7 @@ public class Juego extends InterfaceJuego
 				if(!this.soldados[i].colisionPrincesa(princesa) && this.soldados[i]!=null){
 					this.soldados[i].setHaceDaño(true);
 				}
-				this.soldados[i].dibujarse(entorno);
+				this.soldados[i].dibujarse(entorno, animar);
 				this.soldados[i].avanzar();
 				
 				
@@ -257,10 +257,15 @@ public class Juego extends InterfaceJuego
 	
 	public void tick()
 	{
-		
+
+		if (animar >= 100) {
+			animar = 0;
+		}
+		animar++;
+
 		fondomov.dibujarse(entorno);
 		
-		if(princesa.getVidas() != 0) {
+		if(princesa.getVidas() != 0 && !this.ganado()) {
 			fondomov.avanzar();
 		}
 		
@@ -270,7 +275,7 @@ public class Juego extends InterfaceJuego
 				this.muestraSoldados();
 				this.muestraHongos();
 				
-				princesa.dibujarse(entorno);
+				princesa.dibujarse(entorno, animar);
 		
 				this.verificaDisparo();
 				

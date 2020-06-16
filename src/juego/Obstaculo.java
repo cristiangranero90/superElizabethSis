@@ -2,7 +2,6 @@ package juego;
 
 import java.awt.Color;
 import java.awt.Image;
-import java.util.Random;
 
 import entorno.Entorno;
 import entorno.Herramientas;
@@ -12,9 +11,6 @@ public class Obstaculo {
 	private double x;
 	private double y;
 	private double angulo;
-	private double ancho;
-	private double alto;
-	private Color color;
 	private boolean crece;
 	private boolean haceDaño;
 	private Image imagen;
@@ -22,10 +18,7 @@ public class Obstaculo {
 	public Obstaculo(double x, Color color, boolean crece ) {
 		this.x=x;
 		this.y=425;
-		this.ancho=50;
-		this.alto=50;
 		this.angulo=0;
-		this.color=color;
 		this.crece=crece;
 			
 		imagen = Herramientas.cargarImagen("planta.png");
@@ -65,12 +58,9 @@ public class Obstaculo {
 		}
 	}
 	public void crecer() {
-		
-		this.alto=150;
 		this.y=400;
 	}
 	public void achicarse() {
-		this.alto=50;
 		this.y=425;
 	}
 	public void setHaceDaño(boolean x) {

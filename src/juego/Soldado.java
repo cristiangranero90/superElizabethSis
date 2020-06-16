@@ -13,17 +13,24 @@ public class Soldado {
 	private double x;
 	private double y;
 	private double angulo;
-	private Image imagen;
+	//private Image imagen;
 	private boolean haceDaño;
 	private boolean salto;
 	
+	private Image soldado1;
+	private Image soldado2;
+	private Image soldado3;
+	private Image soldado4;
+	private Image soldado5;
 	
 	public Soldado(double x, double y) {
 		this.x=x;
 		this.y=y;
-
-		
-		imagen = Herramientas.cargarImagen("soldado.png");
+		soldado1 = Herramientas.cargarImagen("SpritesSoldado/sold1.png");
+		soldado2 = Herramientas.cargarImagen("SpritesSoldado/sold2.png");
+		soldado3 = Herramientas.cargarImagen("SpritesSoldado/sold3.png");
+		soldado4 = Herramientas.cargarImagen("SpritesSoldado/sold4.png");
+		soldado5 = Herramientas.cargarImagen("SpritesSoldado/sold5.png");
 		
 	}
 	public void avanzar() {
@@ -37,9 +44,23 @@ public class Soldado {
 		}
 	}
 	
-	public void dibujarse(Entorno entorno) {
+	public void dibujarse(Entorno entorno, int animar) {
 		
-		entorno.dibujarImagen(imagen, this.x, this.y, this.angulo, 0.2);
+		if (animar >= 0 && animar < 20) {
+			entorno.dibujarImagen(this.soldado1, this.x, this.y, this.angulo, 0.9);
+		}
+		else if (animar >= 20 && animar < 40) {
+			entorno.dibujarImagen(this.soldado2, this.x, this.y, this.angulo, 0.9);
+		}
+		else if (animar >= 40 && animar < 60) {
+			entorno.dibujarImagen(this.soldado3, this.x, this.y, this.angulo, 0.9);
+		}
+		else if (animar >= 60 && animar < 80) {
+			entorno.dibujarImagen(this.soldado4, this.x, this.y, this.angulo, 0.9);
+		}
+		else {
+			entorno.dibujarImagen(this.soldado5, this.x, this.y, this.angulo, 0.9);
+		}
 		
 		
 	}
@@ -107,14 +128,6 @@ public class Soldado {
 
 	public void setAngulo(double angulo) {
 		this.angulo = angulo;
-	}
-
-	public Image getImagen() {
-		return imagen;
-	}
-
-	public void setImagen(Image imagen) {
-		this.imagen = imagen;
 	}
 
 	public void setHaceDaño(boolean x) {
