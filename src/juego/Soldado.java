@@ -13,7 +13,7 @@ public class Soldado {
 	private double y;
 	private double angulo;
 	//private Image imagen;
-	private boolean haceDaÃ±o;
+	private boolean haceDaño;
 	private boolean salto;
 	
 	private Image soldado1;
@@ -34,27 +34,27 @@ public class Soldado {
 	}
 	public void avanzar() {
 	
-		if(this.getX()>=0) {
-			this.setX(this.getX()-1.5);
+		if(getX()>=0) {
+			setX(getX()-1.5);
 			
 		}
 		else {
-			this.setX(3000);
+			setX(3000);
 		}
 	}
 	
 	public void dibujarse(Entorno entorno, int animar) {
 		
-		if (animar >= 0 && animar < 20) {
+		if (animar >= 0 && animar < 10) {
 			entorno.dibujarImagen(this.soldado1, this.x, this.y, this.angulo, 0.9);
 		}
-		else if (animar >= 20 && animar < 40) {
+		else if (animar >= 10 && animar < 20) {
 			entorno.dibujarImagen(this.soldado2, this.x, this.y, this.angulo, 0.9);
 		}
-		else if (animar >= 40 && animar < 60) {
+		else if (animar >= 20 && animar < 30) {
 			entorno.dibujarImagen(this.soldado3, this.x, this.y, this.angulo, 0.9);
 		}
-		else if (animar >= 60 && animar < 80) {
+		else if (animar >= 30 && animar < 40) {
 			entorno.dibujarImagen(this.soldado4, this.x, this.y, this.angulo, 0.9);
 		}
 		else {
@@ -129,11 +129,11 @@ public class Soldado {
 		this.angulo = angulo;
 	}
 
-	public void setHaceDaÃ±o(boolean x) {
-		this.haceDaÃ±o = x;
+	public void setHaceDaño(boolean x) {
+		this.haceDaño = x;
 	}
-	public boolean getHaceDaÃ±o() {
-		return this.haceDaÃ±o;
+	public boolean getHaceDaño() {
+		return this.haceDaño;
 	}
 	public void setSalto(boolean salto) {
 		this.salto=salto;

@@ -17,6 +17,7 @@ public class Princesa {
 	 private Image derecha;
 	 private Image izquierda;
 	 private Image saltando1;
+	 private Image saltando2;
 	 private Image disparando;
 	 
 	 //Caminando ------------------- Efecto
@@ -33,13 +34,14 @@ public class Princesa {
 		this.balas=200;
 		
 		//Carga de nuevas imagenes
-		this.derecha = Herramientas.cargarImagen("caminando1.png");
-		this.izquierda = Herramientas.cargarImagen("caminandoI1.png");
-		this.saltando1 = Herramientas.cargarImagen("saltando1.png");
-		this.disparando = Herramientas.cargarImagen("disparando.png");
+		this.derecha = Herramientas.cargarImagen("Sprites princesa/caminando1.png");
+		this.izquierda = Herramientas.cargarImagen("Sprites princesa/caminandoI1.png");
+		this.saltando1 = Herramientas.cargarImagen("Sprites princesa/saltando1.png");
+		this.saltando2 = Herramientas.cargarImagen("Sprites princesa/saltando2.png");
+		this.disparando = Herramientas.cargarImagen("Sprites princesa/disparando.png");
 		
 		//Nuevos Sprites
-		this.caminando1 = Herramientas.cargarImagen("caminando1.png");
+		this.caminando1 = Herramientas.cargarImagen("Sprites princesa/caminando1.png");
 		this.caminando2 = Herramientas.cargarImagen("Sprites princesa/caminando2.png");
 		this.caminando3 = Herramientas.cargarImagen("Sprites princesa/caminando3.png");
 		this.caminando4 = Herramientas.cargarImagen("Sprites princesa/caminando4.png");
@@ -60,16 +62,16 @@ public class Princesa {
 			
 			else {
 				
-				if (animar >= 0 && animar < 20) {
+				if (animar >= 0 && animar < 10) {
 					entorno.dibujarImagen(this.caminando1, this.x, this.y, this.angulo, 1.8);
 				}
-				else if (animar >= 20 && animar < 40) {
+				else if (animar >= 10 && animar < 20) {
 					entorno.dibujarImagen(this.caminando2, this.x, this.y, this.angulo, 1.8);
 				}
-				else if (animar >= 40 && animar < 60) {
+				else if (animar >= 20 && animar < 30) {
 					entorno.dibujarImagen(this.caminando3, this.x, this.y, this.angulo, 1.8);
 				}
-				else if (animar >= 60 && animar < 80) {
+				else if (animar >= 30 && animar < 40) {
 					entorno.dibujarImagen(this.caminando4, this.x, this.y, this.angulo, 1.8);
 				}
 				else {
@@ -80,8 +82,9 @@ public class Princesa {
 		
 	}
 	public void saltar(Entorno entorno) { //Recibe entorno para poder dibujar el salto
-	if(this.y>200) {
-		this.y= this.y - 6;
+	
+		if(getY()>200) {
+		setY(getY()-6);
 		entorno.dibujarImagen(this.saltando1, this.x, this.y, this.angulo, 1.8);
 		
 		
@@ -89,25 +92,30 @@ public class Princesa {
 	
 	}
 	public void bajar(Entorno entorno) { //Recibe entorno para poder dibujar el salto
-		if(this.y<=385) {
-			this.y=this.y+4;
-			entorno.dibujarImagen(this.saltando1, this.x, this.y, this.angulo, 1.8);
+		
+		if(getY()<=385) {
+			setY(getY()+4);
+			entorno.dibujarImagen(this.saltando2, this.x, this.y, this.angulo, 1.8);
 		}
 	}
 
 	public void avanzar() {
-		if(this.x<300) {
-			this.x= this.x +2;
+		
+		if(getX()<300) {
+			setX(getX()+2);
 		}
 	}
 	
 	public void retroceder() {
-		if(this.x>50) {
-			this.x=this.x-2;
+		
+		if(getX()>50) {
+			setX(getX() -2);
 		}
 		
 	}
 
+	//Getters and Setters-------------------------------------------------------------
+	
 	public double getX() {
 		return this.x;
 	}
@@ -119,14 +127,28 @@ public class Princesa {
 	public int getVidas() {
 		return vidas;
 	}
-	public void setVidas(int vidas) {
-		this.vidas = vidas;
+	public void setVidas(int vidas) { //Vidas mayor que cero
+		
+		if (vidas < 0) {
+			throw new RuntimeException("Las vidas no pueden ser menor que cero.");
+		}
+		else {
+			this.vidas = vidas;
+		}
+		
 	}
 	public double getAngulo() {
 		return angulo;
 	}
-	public void setAngulo(double angulo) {
-		this.angulo = angulo;
+	public void setAngulo(double angulo) {  //Invariante de representacion del angulo
+		
+		if (angulo != 0) {
+			throw new RuntimeException("El angulo solo puede ser cero.");
+		}
+		else {
+			this.angulo = angulo;
+		}
+		
 	}
 	public int getBalas() {
 		return balas;
@@ -134,8 +156,15 @@ public class Princesa {
 	public void setBalas(int balas) {
 		this.balas = balas;
 	}
-	public void setX(double x) {
-		this.x = x;
+	public void setX(double x) { // x entre 51 y 299 estricto
+		
+		if (x < 50 || x > 300) {
+			throw new RuntimeException("x debe encontrarse entre los valores 51 y 299");
+		}
+		else {
+			this.x = x;
+		}
+		
 	}
 	public void setY(double y) {
 		this.y = y;

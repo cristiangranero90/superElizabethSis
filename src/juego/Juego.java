@@ -238,7 +238,7 @@ public class Juego extends InterfaceJuego
 	public void tick()
 	{
 
-		if (animar >= 100) {
+		if (animar >= 50) {
 			animar = 0;
 		}
 		animar++;
