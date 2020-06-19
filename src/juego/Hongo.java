@@ -23,6 +23,7 @@ public class Hongo {
 	}
 
 	public void avanzar() {
+		
 		if(getX()>0) {
 			setX(getX()-1);
 		}
