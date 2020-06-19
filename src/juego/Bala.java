@@ -16,27 +16,28 @@ public class Bala {
 	 
 	
 	public Bala(double x, double y) {
-		this.x=x;
-		this.y=y;
 		
+		setX(x);
+		setY(y);
 		
 		imagen = Herramientas.cargarImagen("bala.png");
 		
 	}
 	public void dibujarse(Entorno entorno) {
-		entorno.dibujarImagen(imagen, this.x, this.y, this.angulo, 0.1);
+		
+		entorno.dibujarImagen(imagen, getX(), getY(), getAngulo(), 0.1);
 	}
 	public void avanzar() {
 		
-		if(this.x<800) {
+		if(getX()<800) {
 			
-			this.x=this.x+3;
+			setX(getX()+3);
 		}
 		
 	}
 	public boolean choque(Soldado soldado) {
 
-			double distancia=Math.sqrt((Math.pow((this.getX() - soldado.getX()),2))+(Math.pow(this.getY()-soldado.getY(), 2)));
+			double distancia=Math.sqrt((Math.pow((getX() - soldado.getX()),2))+(Math.pow(getY()-soldado.getY(), 2)));
 			
 			if(distancia<10) {
 				return true;
