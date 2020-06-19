@@ -14,6 +14,7 @@ public class FondoMov {
 	
 	
 	public FondoMov(double x, double y) {
+		
 		setX(x);
 		setY(y);
 		
@@ -22,8 +23,10 @@ public class FondoMov {
 
 	}
 	public void dibujarse (Entorno entorno) {
+		
 		entorno.dibujarImagen(imagen, 400, 200, 0, 1.2);
 		entorno.dibujarImagen(suelo, getX(), getY(), getAngulo(), 3.5);
+		
 	}
 
 	public void avanzar() {
@@ -55,7 +58,13 @@ public class FondoMov {
 		return angulo;
 	}
 	public void setAngulo(double angulo) {
-		this.angulo = angulo;
+		if (angulo != 0) {
+			throw new RuntimeException("El angulo solo puede ser cero. ");
+		}
+		else {
+			this.angulo = angulo;
+		}
+		
 	}
 	
 }

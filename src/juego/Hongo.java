@@ -16,17 +16,18 @@ public class Hongo {
 
 
 	public Hongo(double x, double y) {
-		this.x=x;
-		this.y=y;
+		setX(x);
+		setY(y);
+		
 		this.imagen = Herramientas.cargarImagen("Hongo.png");
 	}
 
 	public void avanzar() {
-		if(this.x>0) {
-			this.x=x-1;
+		if(getX()>0) {
+			setX(getX()-1);
 		}
 		else{
-			this.x=1000;
+			setX(1000);
 
 		}
 	}
