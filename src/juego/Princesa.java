@@ -28,6 +28,16 @@ public class Princesa {
 	 private Image caminando5;
 
 	public Princesa(int x, int y, int vidas){
+		
+		if(x!=200 || y!=400 || vidas!=3) {
+			
+			throw new RuntimeException("la posición inicial es x=200, y=400,vidas=3");
+		}
+		
+	
+		else {
+	
+		
 		this.x = x;
 		this.y = y;
 		this.vidas=vidas;
@@ -46,8 +56,10 @@ public class Princesa {
 		this.caminando3 = Herramientas.cargarImagen("Sprites princesa/caminando3.png");
 		this.caminando4 = Herramientas.cargarImagen("Sprites princesa/caminando4.png");
 		this.caminando5 = Herramientas.cargarImagen("Sprites princesa/caminando5.png");
-	}
+		}
 
+	}
+	
 	public void dibujarse(Entorno entorno, int animar) { //Se agregaron los sprites a dibujarse
 		
 			if (entorno.estaPresionada(entorno.TECLA_DERECHA)) {

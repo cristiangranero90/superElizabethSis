@@ -10,16 +10,24 @@ public class Obstaculo {
 	private double y;
 	private double angulo;
 	private boolean crece;
-	private boolean haceDa�o;
+	private boolean haceDaño;
 	private Image imagen;
 	
 	public Obstaculo(double x, boolean crece ) {
+		
+		if(x<800) {
+			
+			throw new RuntimeException("la posición inicial del obstaculo es x>=800");
+		}
+		
+	
+		else {
 		this.x=x;
 		this.y=425;
 		this.angulo=0;
 		this.crece=crece;	
 		this.imagen = Herramientas.cargarImagen("planta.png");
-		
+		}	
 	}
 	public void dibujarse(Entorno entorno) {
 		
@@ -60,11 +68,11 @@ public class Obstaculo {
 	public void achicarse() {
 		this.y=425;
 	}
-	public void setHaceDa�o(boolean x) {
-		this.haceDa�o = x;
+	public void setHaceDaño(boolean x) {
+		this.haceDaño = x;
 	}
-	public boolean getHaceDa�o() {
-		return this.haceDa�o;
+	public boolean getHaceDaño() {
+		return this.haceDaño;
 	}
 	public double getX() {
 		return x;

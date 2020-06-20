@@ -13,7 +13,7 @@ public class Soldado {
 	private double y;
 	private double angulo;
 	//private Image imagen;
-	private boolean haceDa�o;
+	private boolean haceDaño;
 	private boolean salto;
 	
 	private Image soldado1;
@@ -23,6 +23,14 @@ public class Soldado {
 	private Image soldado5;
 	
 	public Soldado(double x, double y) {
+
+		if(x<800 || y!=400) {
+			
+			throw new RuntimeException("la posición inicial es x>800, y=400");
+		}
+	
+		else {
+		
 		this.x=x;
 		this.y=y;
 		this.soldado1 = Herramientas.cargarImagen("SpritesSoldado/sold1.png");
@@ -30,7 +38,7 @@ public class Soldado {
 		this.soldado3 = Herramientas.cargarImagen("SpritesSoldado/sold3.png");
 		this.soldado4 = Herramientas.cargarImagen("SpritesSoldado/sold4.png");
 		this.soldado5 = Herramientas.cargarImagen("SpritesSoldado/sold5.png");
-		
+		}
 	}
 	public void avanzar() {
 	
@@ -129,11 +137,11 @@ public class Soldado {
 		this.angulo = angulo;
 	}
 
-	public void setHaceDa�o(boolean x) {
-		this.haceDa�o = x;
+	public void setHaceDaño(boolean x) {
+		this.haceDaño = x;
 	}
-	public boolean getHaceDa�o() {
-		return this.haceDa�o;
+	public boolean getHaceDaño() {
+		return this.haceDaño;
 	}
 	public void setSalto(boolean salto) {
 		this.salto=salto;

@@ -16,6 +16,7 @@ public class Bala {
 	 
 	
 	public Bala(double x, double y) {
+	
 		
 		setX(x);
 		setY(y);
