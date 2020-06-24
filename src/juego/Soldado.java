@@ -72,20 +72,6 @@ public class Soldado {
 		
 	}
 	
-	public void saltar(Entorno entorno) { //Recibe entorno para poder dibujar el salto
-		if(this.y>280) {
-			this.y= this.y-6;
-			
-		}
-		}
-		public void bajar(Entorno entorno) { //Recibe entorno para poder dibujar el salto
-			if(this.y<=385) {
-				this.y=385;
-				this.y=this.y+1;
-			
-			}
-		}
-	
 	public boolean colisionPrincesa(Princesa princesa) {
 		
 		
