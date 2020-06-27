@@ -34,17 +34,16 @@ public class Juego extends InterfaceJuego
 		this.entorno = new Entorno(this, "Super Elizabeth Sis - Grupo 2 - v1", 800, 600);
 		this.fondomov = new FondoMov(0,530);
 		this.princesa = new Princesa();	
-		this.crearSoldados();
-		this.creaObstaculos();
-		this.cearHongos();
 		this.disparo=false;
 		this.salto=false;
 		this.animar = 0;
 		this.entorno.iniciar();
-		
+		this.crearSoldados();
+		this.creaObstaculos();
+		this.cearHongos();
 		
 	}
-	//Da vidas a la princesa
+	
 	private void cearHongos() {
 		int v=1000;
 		
@@ -311,25 +310,6 @@ public class Juego extends InterfaceJuego
 		return this.cantidadSoldados;
 	}
 
-	public Princesa getPrincesa() {
-		return princesa;
-	}
-
-	public void setPrincesa(Princesa princesa) {
-		this.princesa = princesa;
-	}
-
-	public boolean isSalto() {
-		
-		return salto;
-	}
-
-	public void setSalto(boolean salto) {
-		
-		this.salto = salto;
-	}
-
-
 	public int getPuntos() {
 		return puntos;
 	}
@@ -350,8 +330,7 @@ public class Juego extends InterfaceJuego
 	@SuppressWarnings("unused")
 	public static void main(String[] args)
 	{
-		Juego juego = new Juego();
-		
+		Juego juego = new Juego();	
 	
 	}
 
