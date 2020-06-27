@@ -65,12 +65,7 @@ public class Bala {
 	public void setAngulo(double angulo) {
 		this.angulo = angulo;
 	}
-	public Image getImagen() {
-		return imagen;
-	}
-	public void setImagen(Image imagen) {
-		this.imagen = imagen;
-	}
+
 	
 	
 }

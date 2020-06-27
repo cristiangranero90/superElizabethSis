@@ -1,9 +1,7 @@
 package juego;
 
 import java.awt.Color;
-import java.awt.Image;
 import java.util.Random;
-import javax.sound.sampled.Clip;
 import entorno.Entorno;
 import entorno.Herramientas;
 import entorno.InterfaceJuego;
