@@ -10,7 +10,7 @@ public class Obstaculo {
 	private double y;
 	private double angulo;
 	private boolean crece;
-	private boolean haceDaño;
+	private boolean haceDano;
 	private Image imagen;
 	
 	public Obstaculo(double x, boolean crece ) {
@@ -68,11 +68,11 @@ public class Obstaculo {
 	public void achicarse() {
 		this.y=425;
 	}
-	public void setHaceDaño(boolean x) {
-		this.haceDaño = x;
+	public void setHaceDano(boolean x) {
+		this.haceDano = x;
 	}
-	public boolean getHaceDaño() {
-		return this.haceDaño;
+	public boolean getHaceDano() {
+		return this.haceDano;
 	}
 	public double getX() {
 		return x;

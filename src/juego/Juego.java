@@ -10,25 +10,20 @@ import entorno.InterfaceJuego;
 
 public class Juego extends InterfaceJuego
 {
-	// El objeto Entorno que controla el tiempo y otros
+	
 	private Entorno entorno;
 	private Princesa princesa;
 	private boolean salto;
 	private Bala bala;
 	private Soldado [] soldados;
 	private boolean disparo;
-	private Image suelo;
 	private int puntos;
 	private int cantidadSoldados;
 	private Obstaculo [] obstaculos;
 	private Hongo [] hongo;
 	private FondoMov fondomov;
-	private Clip gameOver;
-	private Clip vida;
-	private Clip jump;
-	private Clip mario;
-	private Clip disparos;
-	private Clip enemigo;
+	
+
 	private int animar;
 	
 	Juego()
@@ -37,16 +32,8 @@ public class Juego extends InterfaceJuego
 		
 
 		this.entorno = new Entorno(this, "Super Elizabeth Sis - Grupo 2 - v1", 800, 600);
-		
-		
-		this.suelo = Herramientas.cargarImagen("suelo.png");
 		this.fondomov = new FondoMov(0,530);
-		this.princesa = new Princesa(200, 400, 3);	
-		setGameOver(Herramientas.cargarSonido("gameOver.wav"));
-		setVida(Herramientas.cargarSonido("vida.wav"));
-		setJump(Herramientas.cargarSonido("jump.wav"));
-		setMario(Herramientas.cargarSonido("mario.wav"));
-	
+		this.princesa = new Princesa();	
 		this.crearSoldados();
 		this.creaObstaculos();
 		this.cearHongos();
@@ -66,7 +53,7 @@ public class Juego extends InterfaceJuego
 		for(int i=0;i<this.hongo.length;i++) {
 			this.hongo[i]=new Hongo(v,200);
 			v=v+600;
-			this.setCantidadHongos(this.getCantidadHongos()+1);
+			
 		}	
 	}
 
@@ -78,7 +65,7 @@ public class Juego extends InterfaceJuego
 		this.soldados = new Soldado[15];
 		
 		for(int i=0;i<this.soldados.length;i++) {
-			this.soldados[i]=new Soldado(j,400);
+			this.soldados[i]=new Soldado(j);
 			j=j+200+(100*r.nextInt(4));
 			
 			this.setCantidadSoldados(this.getCantidadSoldados()+1);
@@ -131,17 +118,17 @@ public class Juego extends InterfaceJuego
 		for(int i=0;i<this.obstaculos.length;i++) {
 			
 			if(!this.obstaculos[i].colisionPrincesa(princesa)){
-				this.obstaculos[i].setHaceDaño(true);
+				this.obstaculos[i].setHaceDano(true);
 				
 			}
 			this.obstaculos[i].dibujarse(entorno);
 			this.obstaculos[i].avanzar();
 			
-			if(this.obstaculos[i].colisionPrincesa(princesa) && this.obstaculos[i].getHaceDaño()  ) {
+			if(this.obstaculos[i].colisionPrincesa(princesa) && this.obstaculos[i].getHaceDano()  ) {
 				Herramientas.play("enemigo.wav");
 				this.princesa.setVidas(princesa.getVidas()-1);
 				
-				this.obstaculos[i].setHaceDaño(false);
+				this.obstaculos[i].setHaceDano(false);
 				
 			}
 			if(this.obstaculos[i].getCrece() && this.obstaculos[i].getX()<50) {
@@ -172,7 +159,7 @@ public class Juego extends InterfaceJuego
 			if(this.soldados[i]!= null) 
 			{
 				if(!this.soldados[i].colisionPrincesa(princesa) && this.soldados[i]!=null){
-					this.soldados[i].setHaceDaño(true);
+					this.soldados[i].setHaceDano(true);
 				}
 				this.soldados[i].dibujarse(entorno, animar);
 				this.soldados[i].avanzar();
@@ -198,10 +185,10 @@ public class Juego extends InterfaceJuego
 				this.disparo=false;
 			}
 			
-			if(this.soldados[i]!=null && this.soldados[i].colisionPrincesa(princesa) && this.soldados[i].getHaceDaño()  ) {
+			if(this.soldados[i]!=null && this.soldados[i].colisionPrincesa(princesa) && this.soldados[i].getHaceDano()  ) {
 				Herramientas.play("enemigo.wav");
 				princesa.setVidas(princesa.getVidas()-1);
-				this.soldados[i].setHaceDaño(false);
+				this.soldados[i].setHaceDano(false);
 			}
 	
 		}
@@ -342,37 +329,6 @@ public class Juego extends InterfaceJuego
 		this.salto = salto;
 	}
 
-	public Bala getBala() {
-		return bala;
-	}
-
-	public void setBala(Bala bala) {
-		this.bala = bala;
-	}
-
-	public Soldado[] getSoldados() {
-		return soldados;
-	}
-
-	public void setSoldados(Soldado[] soldados) {
-		this.soldados = soldados;
-	}
-
-	public boolean isDisparo() {
-		return disparo;
-	}
-
-	public void setDisparo(boolean disparo) {
-		this.disparo = disparo;
-	}
-
-	public Image getFondo() {
-		return suelo;
-	}
-
-	public void setFondo(Image suelo) {
-		this.suelo = suelo;
-	}
 
 	public int getPuntos() {
 		return puntos;
@@ -397,52 +353,6 @@ public class Juego extends InterfaceJuego
 		Juego juego = new Juego();
 		
 	
-	}
-	public Clip getGameOver() {
-		return gameOver;
-	}
-	public void setGameOver(Clip gameOver) {
-		this.gameOver = gameOver;
-	}
-	public Clip getVida() {
-		return vida;
-	}
-	public void setVida(Clip vida) {
-		this.vida = vida;
-	}
-	public Clip getJump() {
-		return jump;
-	}
-	public void setJump(Clip jump) {
-		this.jump = jump;
-	}
-	public Clip getMario() {
-		return mario;
-	}
-	public void setMario(Clip mario) {
-		this.mario = mario;
-	}
-	public Clip getDisparos() {
-		return disparos;
-	}
-	public void setDisparos(Clip disparos) {
-		this.disparos = disparos;
-	}
-	public Clip getEnemigo() {
-		return enemigo;
-	}
-	public void setEnemigo(Clip enemigo) {
-		this.enemigo = enemigo;
-	}
-
-	private int getCantidadHongos() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	private void setCantidadHongos(int i) {
-		// TODO Auto-generated method stub
-		
 	}
 
 }

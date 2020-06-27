@@ -27,20 +27,11 @@ public class Princesa {
 	 private Image caminando4;
 	 private Image caminando5;
 
-	public Princesa(int x, int y, int vidas){
+	public Princesa(){
 		
-		if(x!=200 || y!=400 || vidas!=3) {
-			
-			throw new RuntimeException("la posición inicial es x=200, y=400,vidas=3");
-		}
-		
-	
-		else {
-	
-		
-		this.x = x;
-		this.y = y;
-		this.vidas=vidas;
+		this.x = 200;
+		this.y = 400;
+		this.vidas=3;
 		this.balas=200;
 		
 		//Carga de nuevas imagenes
@@ -56,7 +47,7 @@ public class Princesa {
 		this.caminando3 = Herramientas.cargarImagen("Sprites princesa/caminando3.png");
 		this.caminando4 = Herramientas.cargarImagen("Sprites princesa/caminando4.png");
 		this.caminando5 = Herramientas.cargarImagen("Sprites princesa/caminando5.png");
-		}
+		
 
 	}
 	
