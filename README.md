@@ -1,1 +1,1 @@
-# Game Super Elizabeth Sis, UNGS 2020. POO project
+# Game Super Elizabeth Sis, UNGS 2020. OOP project
